@@ -16,6 +16,7 @@ class CreateAccessCodesTable extends Migration
         Schema::create('access_codes', function (Blueprint $table) {
             $table->id();
             $table->string('code')->nullable();
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }
