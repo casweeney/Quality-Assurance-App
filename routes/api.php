@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\QaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ use App\Http\Controllers\Auth\AuthController;
 
 Route::post('/user/signup', [AuthController::class, 'signupStore'])->name('signupStore');
 Route::post('/user/signin', [AuthController::class, 'login'])->name('login');
+Route::post('/submit/project', [QaController::class, 'submitProject']);
