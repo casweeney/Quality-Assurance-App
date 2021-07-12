@@ -52,7 +52,11 @@ class AuthController extends Controller
             $user->role = $request->role;
             $user->save();
 
-            return response($user, 201);
+            return response()->json([
+                'user' => $user,
+                'status' => 'success',
+                'message' => 'User created'
+            ]);
 
         } else {
             return response()->json([

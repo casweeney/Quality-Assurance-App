@@ -15,7 +15,8 @@ class CreateQasTable extends Migration
     {
         Schema::create('qas', function (Blueprint $table) {
             $table->id();
-            $table->string('qa_person')->nullable();
+            $table->bigInteger('user_id');
+            $table->bigInteger('project_id');
             $table->string('qa_url')->nullable();
             $table->longText('qa_comment')->nullable();
             $table->string('qa_media')->nullable();

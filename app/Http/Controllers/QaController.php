@@ -22,7 +22,7 @@ class QaController extends Controller
 
         $project = new Project;
         $project->project_name = $request->projectName;
-        $project->developer = $request->userName;
+        $project->user_id = $request->userID;
         $project->project_url = $request->projectUrl;
         $project->status = "pending";
         $project->save();
@@ -32,5 +32,21 @@ class QaController extends Controller
             'message' => 'Project submitted for QA.'
         ], 200);
 
+    }
+
+    public function fetchUserProjects($user_id) {
+        $projects = Project::where('user_id', $user_id)->get();
+
+        if(count($projects) > 0){
+            return response()->json([
+                'status' => 'success',
+                'projects' => $projects
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'No project added'
+            ]);
+        }
     }
 }
