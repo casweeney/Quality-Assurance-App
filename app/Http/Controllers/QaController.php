@@ -45,8 +45,34 @@ class QaController extends Controller
         } else {
             return response()->json([
                 'status' => 'success',
+                'projects' => [],
                 'message' => 'No project added'
             ]);
         }
+    }
+
+    public function fetchAllProjects() {
+        $projects = Project::all();
+
+        if(count($projects) > 0){
+            return response()->json([
+                'status' => 'success',
+                'projects' => $projects
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'projects' => [],
+                'message' => 'No project added'
+            ]);
+        }
+    }
+
+    public function fetchProjectDetails($id){
+        $project = Project::with('qas')->where(['id' => $id])->get();
+
+        return response()->json([
+            'project' => $project
+        ]);
     }
 }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    public function qas () {
+        return $this->hasMany(Qa::class);
+    }
 }
