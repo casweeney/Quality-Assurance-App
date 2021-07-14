@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Artsan Command Routes
+Route::get('/config-clear', function () {
+    $status = Artisan::call('config:clear');
+    return '<h1>Configurations cleared</h1>';
+});
+Route::get('/cache-clear', function () {
+    $status = Artisan::call('cache:clear');
+    return '<h1>Cache cleared</h1>';
+});
+Route::get('/config-cache', function () {
+    $status = Artisan::call('config:Cache');
+    return '<h1>Configurations cache cleared</h1>';
+});
+Route::get('/route-clear', function () {
+    $status = Artisan::call('route:clear');
+    return '<h1>Routes cache cleared</h1>';
+});
