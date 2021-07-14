@@ -38,7 +38,7 @@ class QaController extends Controller
 
     public function fetchUserProjects($user_id)
     {
-        $projects = Project::where('user_id', $user_id)->get();
+        $projects = Project::where('user_id', $user_id)->latest()->get();
 
         if(count($projects) > 0){
             return response()->json([
@@ -56,7 +56,7 @@ class QaController extends Controller
 
     public function fetchAllProjects()
     {
-        $projects = Project::all();
+        $projects = Project::latest()->get();
 
         if(count($projects) > 0){
             return response()->json([
@@ -107,5 +107,38 @@ class QaController extends Controller
             'status' => 'success',
             'message' => 'Qa added'
         ], 200);
+    }
+
+    public function addDevComment(Request $request, $qaID)
+    {
+        $validator = \Validator::make($request->all(), [
+            'devComment'  => 'required|string'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first()
+            ], 406);
+        }
+
+        $qa = Qa::where(['id' => $qaID]);
+        $qa->update(['developer_comment' => $request->devComment, 'status' => $request->status]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Comment added'
+        ], 200);        
+    }
+
+    public function updateProjectStatus(Request $request, $projectID)
+    {
+        $project = Project::where(['id' => $projectID]);
+        $project->update(['status' => $request->status]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Status updated'
+        ], 200);        
     }
 }

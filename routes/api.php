@@ -27,3 +27,5 @@ Route::get('/user/{user_id}/fetch/projects', [QaController::class, 'fetchUserPro
 Route::get('/fetch/all/projects', [QaController::class, 'fetchAllProjects']);
 Route::get('/fetch/project/{id}/details', [QaController::class, 'fetchProjectDetails']);
 Route::post('/submit/qa', [QaController::class, 'submitQa']);
+Route::put('/add/dev/qa/{qaID}/comment', [QaController::class, 'addDevComment']);
+Route::put('/update/project/{projectID}/status', [QaController::class, 'updateProjectStatus']);
